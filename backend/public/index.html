@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Cash - Lotería Nacional</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="megacash-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="Mega Cash Lotería">
+                    <h1>Mega Cash</h1>
+                </div>
+                <nav class="user-nav">
+                    <div id="auth-buttons">
+                        <button id="login-btn" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+                        <button id="register-btn" class="btn btn-primary"><i class="fas fa-user-plus"></i> Registrarse</button>
+                    </div>
+                    <div id="user-panel" style="display: none;">
+                        <span id="user-greeting"></span>
+                        <button id="logout-btn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i></button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú de navegación -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#" class="active" id="nav-home"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#" id="nav-play"><i class="fas fa-ticket-alt"></i> Jugar</a></li>
+                <li><a href="#" id="nav-results"><i class="fas fa-history"></i> Resultados</a></li>
+                <li><a href="#" id="nav-recharge"><i class="fas fa-coins"></i> Recargar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container">
+        <!-- Sección de Plan de Premios (Visible por defecto) -->
+        <section id="home-section" class="prizes-section">
+            <h2><i class="fas fa-trophy"></i> Plan de Premios</h2>
+            
+            <div class="prizes-container">
+                <h3>Aciertos del 01 al 43</h3>
+                <table class="prizes-table">
+                    <thead>
+                        <tr>
+                            <th>Aciertos</th>
+                            <th>Premio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5 números</td>
+                            <td>3.000.000 USD</td>
+                        </tr>
+                        <tr>
+                            <td>4 números</td>
+                            <td>1.000.000 USD</td>
+                        </tr>
+                        <tr>
+                            <td>3 números</td>
+                            <td>800 USD</td>
+                        </tr>
+                        <tr>
+                            <td>2 números</td>
+                            <td>250 USD</td>
+                        </tr>
+                        <tr>
+                            <td>1 número</td>
+                            <td>30 USD</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="game-rules">
+                    <p><i class="fas fa-info-circle"></i> Selecciona 5 números del 1 al 45 y 1 número adicional del 1 al 20</p>
+                    <p><i class="fas fa-money-bill-wave"></i> Cada apuesta tiene un valor de $5.000</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección para jugar (Oculta inicialmente) - MODIFICADA -->
+        <section id="play-section" class="game-section" style="display: none;">
+            <div class="play-container">
+                <h2><i class="fas fa-ticket-alt"></i> Selecciona tus números</h2>
+                
+                <div class="number-selection">
+                    <h3>Números Principales (1-45)</h3>
+                    <div class="number-grid" id="number-grid"></div>
+                    
+                    <div class="extra-numbers-container">
+                        <h3>Número Extra (1-20)</h3>
+                        <div class="number-grid" id="extra-number-grid"></div>
+                    </div>
+                </div>
+                
+                <div class="game-controls">
+                    <div class="balance-panel">
+                        <span>Saldo disponible:</span>
+                        <span id="current-balance" class="balance">$0</span>
+                    </div>
+                    <div class="play-actions">
+                        <button id="random-btn" class="btn btn-secondary">
+                            <i class="fas fa-random"></i> Aleatorio
+                        </button>
+                        <button id="clear-btn" class="btn btn-outline">
+                            <i class="fas fa-trash-alt"></i> Limpiar
+                        </button>
+                        <button id="play-btn" class="btn btn-play" disabled>
+                            <i class="fas fa-play"></i> Jugar ($5,000)
+                        </button>
+                    </div>
+                    <p class="game-info">Selecciona 5 números del 1 al 45 y 1 número adicional del 1 al 20</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de resultados (Oculta inicialmente) -->
+        <section id="results-section" class="results-section" style="display: none;">
+            <h2><i class="fas fa-history"></i> Historial de Sorteos</h2>
+            <div class="results-container">
+                <div id="admin-panel" style="display: none;"></div>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Números Ganadores</th>
+                            <th>Número Extra</th>
+                            <th>Premio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- Los resultados se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección de recarga (Oculta inicialmente) -->
+        <section id="recharge-section" class="recharge-section" style="display: none;">
+            <h2><i class="fas fa-coins"></i> Recarga tu Saldo</h2>
+            <div class="recharge-container" id="recharge-container">
+                <!-- Contenido dinámico se cargará aquí -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Banner informativo -->
+    <footer class="info-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h4><i class="fas fa-exclamation-triangle"></i> Juega con moderación</h4>
+                <p>El juego es entretenimiento, juega con moderación. Jugar sin control causa adicción. Prohibida la venta a menores de edad.</p>
+                <p>MegaCash.co brinda atención a sus usuarios, de manera exclusiva, a través del chat online de la página web 24/7.</p>
+                <p>Email: <a href="mailto:megacashh096@gmail.com">megacash096@gmail.com</a></p>
+                <p>Autorizada para operar juegos de suerte y azar en Colombia.</p>
+                <p><a href="#">Términos y Condiciones</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modales -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-sign-in-alt"></i> Acceso a Mega Cash</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Correo electrónico</label>
+                    <input type="email" id="login-email" required placeholder="tucorreo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Contraseña</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary">Ingresar a mi cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-user-plus"></i> Únete a Mega Cash</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-email">Correo electrónico</label>
+                    <input type="email" id="register-email" required placeholder="tucorreo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Contraseña</label>
+                    <input type="password" id="register-password" required placeholder="Mínimo 6 caracteres">
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Confirmar Contraseña</label>
+                    <input type="password" id="register-confirm" required placeholder="Repite tu contraseña">
+                </div>
+                <button type="submit" class="btn btn-primary">Crear mi cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

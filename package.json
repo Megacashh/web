@@ -1,0 +1,42 @@
+{
+    "name": "loteria-baloto",
+    "version": "1.0.0",
+    "description": "Sistema de lotería Megacash Colombia con autenticación y pagos PayPal",
+    "main": "backend/server.js",
+    "scripts": {
+        "start": "node backend/server.js",
+        "dev": "nodemon backend/server.js",
+        "client": "live-server frontend",
+        "dev:full": "concurrently \"npm run dev\" \"npm run client\"",
+        "reset": "rm -rf node_modules package-lock.json && npm install",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.20.2",
+        "connect-mongo": "^5.0.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "express-rate-limit": "^7.5.0",
+        "express-session": "^1.17.3",
+        "express-validator": "^7.2.1",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.13.2",
+        "morgan": "^1.10.0",
+        "passport": "^0.7.0",
+        "passport-jwt": "^4.0.1",
+        "passport-local": "^1.0.0",
+        "paypal-rest-sdk": "^1.8.1",
+        "validator": "^13.11.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.2",
+        "live-server": "^1.2.2",
+        "concurrently": "^8.2.1"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
+}
